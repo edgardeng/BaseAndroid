@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.edgardeng.baseandroid.R;
 import com.edgardeng.util.FileUtils;
 
 /**

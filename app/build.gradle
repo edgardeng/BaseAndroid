@@ -10,6 +10,12 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                PACKAGE_NAME       : applicationId,
+                BUGHD_KEY          : "d306d2e6311d811d8ee5924f5f1311d4",
+                JPUSH_CHANNEL      : "fir.im",
+                JPUSH_APPKEY       : "9b134b3ddd7351ca7d629d5d"
+        ]
     }
     buildTypes {
         release {
@@ -18,6 +24,9 @@ android {
         }
     }
 
+    sourceSets.main {
+        jniLibs.srcDirs = ['libs']  // <-- Set your folder here!
+    }
     useLibrary 'org.apache.http.legacy'
 }
 
@@ -26,4 +35,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/Bughd_android_sdk_v1.3.7.jar')
     compile 'com.android.support:appcompat-v7:23.1.0'
+    compile files('libs/jpush-android-2.0.5.jar')
 }

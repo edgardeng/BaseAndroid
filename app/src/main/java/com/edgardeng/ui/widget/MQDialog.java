@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.app.Dialog;
 
+import com.edgardeng.baseandroid.R;
 
 
 /**
@@ -71,7 +72,7 @@ public class MQDialog extends Dialog  implements OnClickListener{
 	private int dialogTag;
 	
 	public MQDialog(Context context) {
-		super(context,R.style.MQDialog);
+		super(context, R.style.MQDialog);
 		this.context = context;
 	}
 	public MQDialog(Context context,int theme) {

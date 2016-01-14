@@ -9,11 +9,12 @@ import android.util.Log;
 
 
 import com.edgardeng.baseandroid.BuildConfig;
+import com.edgardeng.baseandroid.receiver.UpdateReceiver;
 import com.edgardeng.ui.widget.MQDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import com.edgardeng.baseandroid.R;
 import java.util.List;
 
 import im.fir.sdk.FIR;

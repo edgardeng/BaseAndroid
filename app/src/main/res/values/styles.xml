@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Light"
         >
-        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowFullscreen">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <!-- Customize your theme here. -->

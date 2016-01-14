@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/content_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_content"
+        android:layout_marginRight="@dimen/padding_content"
+        android:background="@drawable/bg_round">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_user"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/user" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_user"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/imageView_user"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView_password"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imageView_user"
+            android:layout_marginLeft="10dp"
+            android:src="@mipmap/password"  />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_password"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/imageView_user"
+            android:layout_toRightOf="@id/imageView_password" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_item"
+            android:text="忘记密码?"
+            android:id="@+id/button_forget"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+
+            android:background="@null"
+            android:layout_below="@id/imageView_password"  />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/size_button"
+        android:text="登录"
+        android:id="@+id/button_login"
+        android:layout_below="@+id/content_info"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/padding_content"
+        android:layout_marginRight="@dimen/padding_content"
+        android:padding="@dimen/padding_content"
+        android:background="@drawable/bg_button"/>
+
+
+</RelativeLayout>
