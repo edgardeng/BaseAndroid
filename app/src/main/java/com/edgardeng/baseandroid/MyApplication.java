@@ -1,6 +1,6 @@
-package com.edgardeng.baseandroid;/**
- * Created by dengxixi on 16/1/9.
- */
+package com.edgardeng.baseandroid;
+
+
 
 import android.app.Application;
 import android.content.pm.ApplicationInfo;
@@ -20,21 +20,27 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        FIR.init(this);//fir.im 初始化
+        FIR.init(this);//fir.im 初始化
 
         ApplicationInfo appinfo = null;
         try {
             appinfo = getPackageManager().getApplicationInfo(getPackageName(), PackageManager.GET_META_DATA);
             String cannel   = appinfo.metaData.getString("JPUSH_CHANNEL");
             String pakage   = appinfo.metaData.getString("PACKAGE_NAME");
-            ILog.e(cannel+" - "+pakage);
+            ILog.w(cannel+" - "+pakage);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
-//        JPushInterface.setDebugMode(true);//BuildConfig.DEBUG
-        JPushInterface.init(getApplicationContext()); //jpush init
 
+        try{
+            //开启 JPush
+            JPushInterface.setDebugMode(BuildConfig.DEBUG);
+            JPushInterface.init(this);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

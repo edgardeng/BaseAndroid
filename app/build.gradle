@@ -17,6 +17,7 @@ android {
                 JPUSH_APPKEY       : "9b134b3ddd7351ca7d629d5d"
         ]
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,7 +28,6 @@ android {
     sourceSets.main {
         jniLibs.srcDirs = ['libs']  // <-- Set your folder here!
     }
-    useLibrary 'org.apache.http.legacy'
 }
 
 
@@ -35,5 +35,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/Bughd_android_sdk_v1.3.7.jar')
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile files('libs/jpush-android-2.0.5.jar')
+    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.0.1'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.google.code.gson:gson:2.6.2'
+//    compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }

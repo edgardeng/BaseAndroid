@@ -53,6 +53,21 @@ public class ILog {
 		}
 	}
 
+	public static void w(String tag, String msg) {
+
+		if (showLog && msg!=null) {
+			Log.w(tag, msg);
+		}
+	}
+
+	public static void w(String msg) {
+
+		if (showLog && msg!=null) {
+			Log.w(tag, msg);
+		}
+	}
+
+
 	public static void setShowLog(boolean value) {
 
 		showLog = value;

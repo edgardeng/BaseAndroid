@@ -1,7 +1,5 @@
 package com.edgardeng.baseandroid.receiver;
-/**
- * Created by dengxixi on 16/1/14.
- */
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,17 +8,12 @@ import android.util.Log;
 
 import com.edgardeng.baseandroid.UILaunch;
 import com.edgardeng.util.ILog;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Iterator;
-
 import cn.jpush.android.api.JPushInterface;
+
 /**
- *    /**
- * 自定义接收器
- *
  * 如果不定义这个 Receiver，则：
  * 1) 默认用户会打开主界面
  * 2) 接收不到自定义消息
@@ -34,11 +27,11 @@ public class JpushReceiver  extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
-            Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
+            Log.e(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
-                Log.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
+                Log.e(TAG, "[MyReceiver] 接收Registration Id : " + regId);
                 //send the Registration Id to your server...
 
             } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
@@ -74,6 +67,7 @@ public class JpushReceiver  extends BroadcastReceiver {
 
         // 打印所有的 intent extra 数据
         private static String printBundle(Bundle bundle) {
+
             StringBuilder sb = new StringBuilder();
             for (String key : bundle.keySet()) {
                 if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {

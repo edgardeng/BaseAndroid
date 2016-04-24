@@ -1,4 +1,4 @@
-package com.edgardeng.cloudsensor.data;
+package com.edgardeng.data;
 
 import java.util.List;
 
