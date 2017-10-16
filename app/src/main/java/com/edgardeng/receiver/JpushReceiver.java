@@ -1,4 +1,4 @@
-package com.edgardeng.baseandroid.receiver;
+package com.edgardeng.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

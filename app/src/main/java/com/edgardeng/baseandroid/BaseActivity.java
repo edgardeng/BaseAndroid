@@ -1,4 +1,4 @@
-package com.edgardeng.ui.base;/**
+package com.edgardeng.baseandroid;/**
  * Created by dengxixi on 16/1/9.
  */
 

@@ -1,4 +1,4 @@
-package com.edgardeng.baseandroid.receiver;
+package com.edgardeng.receiver;
 
 import java.io.File;
 

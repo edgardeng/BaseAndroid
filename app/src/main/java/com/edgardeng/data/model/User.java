@@ -46,6 +46,9 @@ public class User {
             "created_at": "2014-04-18T01:43:34Z",
             "updated_at": "2016-04-13T12:58:30Z"
            */
+    public String toString(){
+        return "id:"+id+";email:"+email+";url:"+url;
+    }
 
 
 }

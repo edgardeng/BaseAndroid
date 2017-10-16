@@ -1,4 +1,4 @@
-package com.edgardeng.ui.widget;
+package com.edgardeng.widget;
 
 import java.util.ArrayList;
 import java.util.List;

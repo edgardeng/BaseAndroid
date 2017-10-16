@@ -41,7 +41,10 @@
 
 
         <activity android:name=".UILaunch"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:finishOnTaskLaunch="false" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,7 +56,7 @@
 
 
         <receiver
-            android:name=".receiver.UpdateReceiver">
+            android:name="com.edgardeng.receiver.UpdateReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
                 <action android:name="android.intent.action.DOWNLOAD_NOTIFICATION_CLICKED"/>
@@ -133,7 +136,7 @@
 
         <!-- JPush User defined. 用户自定义的广播接收器-->
         <receiver
-            android:name=".receiver.JpushReceiver"
+            android:name="com.edgardeng.receiver.JpushReceiver"
             android:exported="false"
             android:enabled="true">
             <intent-filter>

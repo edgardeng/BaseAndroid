@@ -7,10 +7,9 @@ package com.edgardeng.data.model;
 import android.content.Context;
 import android.util.Log;
 
-
 import com.edgardeng.baseandroid.BuildConfig;
-import com.edgardeng.baseandroid.receiver.UpdateReceiver;
-import com.edgardeng.ui.widget.MQDialog;
+import com.edgardeng.receiver.UpdateReceiver;
+import com.edgardeng.widget.MQDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
