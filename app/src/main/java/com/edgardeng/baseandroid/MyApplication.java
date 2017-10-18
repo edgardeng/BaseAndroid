@@ -8,8 +8,8 @@ import android.content.pm.PackageManager;
 
 import com.edgardeng.util.ILog;
 
-import cn.jpush.android.api.JPushInterface;
-import im.fir.sdk.FIR;
+//import cn.jpush.android.api.JPushInterface;
+//import im.fir.sdk.FIR;
 
 /**
  * @author Edgar Deng (http:weibo.com/edgardeng)
@@ -20,7 +20,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        FIR.init(this);//fir.im 初始化
+//        FIR.init(this); //fir.im 初始化 去掉fir.im 停止服务
 
         ApplicationInfo appinfo = null;
         try {
@@ -35,8 +35,8 @@ public class MyApplication extends Application {
 
         try{
             //开启 JPush
-            JPushInterface.setDebugMode(BuildConfig.DEBUG);
-            JPushInterface.init(this);
+//            JPushInterface.setDebugMode(BuildConfig.DEBUG);
+//            JPushInterface.init(this);
 
         }catch (Exception e){
             e.printStackTrace();

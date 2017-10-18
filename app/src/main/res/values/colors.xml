@@ -6,12 +6,23 @@
     <color name="button_up"     >#EEEEEE</color>
     <color name="button_down"   >#999999</color>
 
-
+    <color name="blue" >#49b4f6</color>
     <color name="green" >#00FF00</color>
 
     <color name="app_theme" >#06E6EF</color>
 
 
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#ffe0e0e0</color>
+    <color name="colorAccent">#03A9F4</color>
+
+    <color name="colorBaseBackground">#fafafa</color>
+
+    <color name="colorNavItemUnselected">#757575</color>
+    <color name="colorNavItemSelected">@color/colorAccent</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
 
 
 </resources>

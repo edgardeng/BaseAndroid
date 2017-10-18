@@ -11,7 +11,6 @@ import com.edgardeng.util.ILog;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Iterator;
-import cn.jpush.android.api.JPushInterface;
 
 /**
  * 如果不定义这个 Receiver，则：
@@ -28,7 +27,7 @@ public class JpushReceiver  extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
             Log.e(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
-
+/*
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
                 Log.e(TAG, "[MyReceiver] 接收Registration Id : " + regId);
@@ -63,12 +62,14 @@ public class JpushReceiver  extends BroadcastReceiver {
             } else {
                 Log.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
             }
+            */
         }
 
         // 打印所有的 intent extra 数据
         private static String printBundle(Bundle bundle) {
 
             StringBuilder sb = new StringBuilder();
+            /*
             for (String key : bundle.keySet()) {
                 if (key.equals(JPushInterface.EXTRA_NOTIFICATION_ID)) {
                     sb.append("\nkey:" + key + ", value:" + bundle.getInt(key));
@@ -97,6 +98,7 @@ public class JpushReceiver  extends BroadcastReceiver {
                     sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
                 }
             }
+            */
             return sb.toString();
         }
 
@@ -104,8 +106,8 @@ public class JpushReceiver  extends BroadcastReceiver {
         private void processCustomMessage(Context context, Bundle bundle) {
 //            if (MainActivity.isForeground) {
 //                String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
-                String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-                ILog.i(TAG,extras);
+//                String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+//                ILog.i(TAG,extras);
 //                Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
 //                msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
 //                if (!ExampleUtil.isEmpty(extras)) {

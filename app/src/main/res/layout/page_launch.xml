@@ -1,21 +1,36 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UILogin">
-
-    <ImageView
+    android:background="#ffffff">
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <View
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/app_theme"/>
-    <RelativeLayout
+        android:layout_height="400dp"
+        android:background="@drawable/bg_launch_up"/>
+
+    <Button
+        android:id="@+id/button_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true" >
-        <include
-            layout="@layout/part_login_content"  />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:text="立 即 进 入"
+        android:textColor="#ffffff"
+        android:padding="10dp"
+        android:background="@drawable/bg_button_red"/>
 
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="简单的Android框架"
+        android:layout_above="@+id/button_start"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/blue"/>
 
 
 </RelativeLayout>

@@ -2,11 +2,11 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.edgardeng.baseandroid"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -31,11 +31,20 @@ android {
 }
 
 
+ext {
+    supportLibVersion = '23.1.0'
+    gsonVersion = '2.8.0'
+    datetimePickerVersion = '3.1.3'
+    glideVersion = '3.7.0'
+    archRoomVersion = '1.0.0-alpha3'
+    retrofitVersion = '2.2.0'
+}
+
 dependencies {
 //    provided fileTree(include: ['*.jar'], dir: 'libs')
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.jakewharton:butterknife:7.0.1'
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
 
     // https://jcenter.bintray.com/com/squareup/retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.1.0'

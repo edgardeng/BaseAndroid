@@ -16,8 +16,8 @@ import org.json.JSONObject;
 import com.edgardeng.baseandroid.R;
 import java.util.List;
 
-import im.fir.sdk.FIR;
-import im.fir.sdk.VersionCheckCallback;
+//import im.fir.sdk.FIR;
+//import im.fir.sdk.VersionCheckCallback;
 
 /**
  * @author Edgar Deng (http:weibo.com/edgardeng)
@@ -49,29 +49,29 @@ public class Update {
     public   void  check(Context c){
         context = c;
 
-        FIR.checkForUpdateInFIR(Update.API_TOKEN, new VersionCheckCallback() {
-            @Override
-            public void onSuccess(String versionJson) {
-                Log.w(TAG, "check from fir.im success! " + "\n" + versionJson);
-                json2Update(versionJson);
-                getUpdateVersion();
-            }
-
-            @Override
-            public void onFail(Exception exception) {
-                Log.e(TAG, "check fir.im fail! " + "\n" + exception.getMessage());
-            }
-
-            @Override
-            public void onStart() {
-                Log.w(TAG, "check fir.im onStart");
-            }
-
-            @Override
-            public void onFinish() {
-                Log.w(TAG, "check fir.im onFinish");
-            }
-        });
+//        FIR.checkForUpdateInFIR(Update.API_TOKEN, new VersionCheckCallback() {
+//            @Override
+//            public void onSuccess(String versionJson) {
+//                Log.w(TAG, "check from fir.im success! " + "\n" + versionJson);
+//                json2Update(versionJson);
+//                getUpdateVersion();
+//            }
+//
+//            @Override
+//            public void onFail(Exception exception) {
+//                Log.e(TAG, "check fir.im fail! " + "\n" + exception.getMessage());
+//            }
+//
+//            @Override
+//            public void onStart() {
+//                Log.w(TAG, "check fir.im onStart");
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                Log.w(TAG, "check fir.im onFinish");
+//            }
+//        });
     }
 
     private Update json2Update( String json ) {
