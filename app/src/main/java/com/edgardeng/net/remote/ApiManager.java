@@ -1,18 +1,14 @@
 package com.edgardeng.net.remote;
 
-import android.widget.Toast;
-
-import com.edgardeng.baseandroid.R;
 import com.edgardeng.data.model.User;
 
 import java.util.List;
-
 import okhttp3.OkHttpClient;
 import retrofit2.CallAdapter;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observer;
 import rx.Subscription;
 import rx.schedulers.Schedulers;

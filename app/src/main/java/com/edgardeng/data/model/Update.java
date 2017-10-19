@@ -33,7 +33,7 @@ public class Update {
 
     private String update_description;
 
-    private String update_url;/** 检测更新的地址*/
+    private String update_url; /** 检测更新的地址*/
     private String install_url;
     private String version_short;
     private String version_short_local;

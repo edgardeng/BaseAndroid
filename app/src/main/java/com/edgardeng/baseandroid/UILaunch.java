@@ -1,16 +1,15 @@
 package com.edgardeng.baseandroid;
 
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
-import com.edgardeng.baseandroid.ui.UILogin;
 import com.edgardeng.data.model.Repo;
+import com.edgardeng.net.TaskManager;
+import com.edgardeng.net.api.BaseApi;
 import com.edgardeng.net.remote.GitHubService;
 import com.edgardeng.util.ILog;
 
+import java.util.HashMap;
 import java.util.List;
 
 import butterknife.Bind;
@@ -67,7 +66,9 @@ public class UILaunch extends BaseActivity {
     @OnClick(R.id.button_start)
     void onLogin() {
         toast("button_start");
-        forward(UILogin.class);
+//        forward(UILogin.class);
+//        doNetwork();
+        doOkhttp();
     }
 
     private void doNetwork() {
@@ -94,8 +95,58 @@ public class UILaunch extends BaseActivity {
             }
         });
         Call<String> userinfo = gitHubService.userInformation(username);
-        ILog.w("Retrofit Return", userinfo.toString());
+        ILog.w("Retrofit Return INFO 》》 ", userinfo.toString());
 
+    }
+
+    private void doOkhttp() {
+        HashMap<String,String> hash = new HashMap<>();
+        hash.put("c","activity");
+        hash.put("a","getRedPacket4ActivityTest");
+        hash.put("userid","361");
+        hash.put("aid","1");
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+        doTaskAsync(1,null,hash);
+
+//        TaskManager taskManager = new TaskManager(this);
+//        taskManager.setHostIP(BaseApi.HOST_IP);
+//        taskManager.setHostSegment(BaseApi.getHttpPathSegment());
+//
+//        TaskManager taskManager1 = new TaskManager(this);
+//        taskManager1.setHostIP(BaseApi.HOST_IP);
+//        taskManager1.setHostSegment(BaseApi.getHttpPathSegment());
+//
+//        TaskManager taskManager2 = new TaskManager(this);
+//        taskManager2.setHostIP(BaseApi.HOST_IP);
+//        taskManager2.setHostSegment(BaseApi.getHttpPathSegment());
+//        taskManager.get(1,null,hash);
+//        taskManager1.get(1,null,hash);
+//        taskManager2.get(1,null,hash);
+    }
+
+    /** doTaskAsync task with taskid,url,param */
+    public void doTaskAsync (int taskId, String taskUrl, HashMap<String, String> taskArgs) {
+//		doTaskAsync(taskId, taskUrl, taskArgs, 0) ;
+        TaskManager taskManager = getTaskManager();
+        taskManager.get(taskId,taskUrl,taskArgs);
+
+    }
+
+    @Override
+    public void onJsonSuccess(int taskId, String json) {
+        ILog.i(json);
+    }
+
+    @Override
+    public void onJsonFail(int taskId, String json) {
+        ILog.i(json);
     }
 
     private void testRxJava() {
