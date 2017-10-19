@@ -1,14 +1,15 @@
-package com.edgardeng.gesture;
+package com.edgardeng.widget;
 
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.ScaleAnimation;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 
 
 /**  how to use
@@ -48,7 +49,7 @@ public void onGlobalLayout() {
  * @author Edgar Deng (http:weibo.com/edgardeng)
  * @date 16/8/22
  */
-public class DragImageView  extends ImageView {
+public class DragImageView  extends AppCompatImageView {
 
     private Activity mActivity;
 
