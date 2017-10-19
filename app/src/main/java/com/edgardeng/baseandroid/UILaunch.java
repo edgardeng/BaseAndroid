@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.edgardeng.data.model.Repo;
+import com.edgardeng.data.model.User;
 import com.edgardeng.net.TaskManager;
-import com.edgardeng.net.api.BaseApi;
-import com.edgardeng.net.remote.GitHubService;
+import com.edgardeng.net.remote.ApiManager;
 import com.edgardeng.util.ILog;
 
 import java.util.HashMap;
@@ -21,9 +21,12 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
+import rx.Observer;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class UILaunch extends BaseActivity {
 
@@ -73,31 +76,41 @@ public class UILaunch extends BaseActivity {
 
     private void doNetwork() {
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(GitHubService.END_POINT)
-                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build();
-        GitHubService gitHubService = retrofit.create(GitHubService.class);
-
-        String username = "edgardeng";
-        Call<List<Repo>> call = gitHubService.listRepos(username);
-
-        call.enqueue(new Callback<List<Repo>>() {
-            @Override
-            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-                List<Repo> repos = response.body();
-                ILog.w("Retrofit Return", repos.toString());
-            }
-
-            @Override
-            public void onFailure(Call<List<Repo>> call, Throwable t) {
-            }
-        });
-        Call<String> userinfo = gitHubService.userInformation(username);
-        ILog.w("Retrofit Return INFO 》》 ", userinfo.toString());
+        // 获取用户信息
+        subscription = ApiManager.github()
+                .repos("edgardeng")
+                .subscribeOn(Schedulers.io())
+//                .observeOn(An)
+                .subscribe(getObserver());
 
     }
+    protected Subscription subscription;
+    Observer<List<Repo>> observer;
+    private Observer<? super List<Repo>> getObserver() {
+
+        if (null == observer) {
+            observer = new Observer<List<Repo>>() {
+                @Override
+                public void onCompleted() {
+                    ILog.w(" - onCompleted");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    ILog.w(" - onError");
+                }
+
+                @Override
+                public void onNext(List<Repo> users) {
+                    ILog.w(" - onNext");
+                }
+            };
+        }
+
+        return observer;
+    }
+
+
 
     private void doOkhttp() {
         HashMap<String,String> hash = new HashMap<>();
@@ -106,29 +119,6 @@ public class UILaunch extends BaseActivity {
         hash.put("userid","361");
         hash.put("aid","1");
         doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-        doTaskAsync(1,null,hash);
-
-//        TaskManager taskManager = new TaskManager(this);
-//        taskManager.setHostIP(BaseApi.HOST_IP);
-//        taskManager.setHostSegment(BaseApi.getHttpPathSegment());
-//
-//        TaskManager taskManager1 = new TaskManager(this);
-//        taskManager1.setHostIP(BaseApi.HOST_IP);
-//        taskManager1.setHostSegment(BaseApi.getHttpPathSegment());
-//
-//        TaskManager taskManager2 = new TaskManager(this);
-//        taskManager2.setHostIP(BaseApi.HOST_IP);
-//        taskManager2.setHostSegment(BaseApi.getHttpPathSegment());
-//        taskManager.get(1,null,hash);
-//        taskManager1.get(1,null,hash);
-//        taskManager2.get(1,null,hash);
     }
 
     /** doTaskAsync task with taskid,url,param */

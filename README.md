@@ -2,7 +2,9 @@
 > 一个简易的Android框架
 
 ## Structure 结构
+
 ```
+
 -- baseandroid 项目 目录
 -- data  数据
    -- local 本地数据存储
@@ -16,9 +18,6 @@
 -- service  服务
 -- util     工具集 【！需要改变，最好不要出现 util，base，common等通用构架】
 -- widget   自定义视图控件
-
-
-
 
 ```
 
@@ -42,9 +41,9 @@ and search for ButterKnife Zelezny
    
    convert Java Objects into their JSON representation.
 
-* [Google Gson](https://github.com/google/gson)
+* [RxJava](https://github.com/ReactiveX/RxJava)
       
-      convert Java Objects into their JSON representation.
+       Java VM implementation of Reactive Extensions.
    
    
 ## UI 
