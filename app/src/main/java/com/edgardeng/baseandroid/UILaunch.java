@@ -4,15 +4,16 @@ import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.edgardeng.data.model.Repo;
 import com.edgardeng.data.model.User;
 import com.edgardeng.net.api.GithubApi;
 import com.edgardeng.net.remote.ApiManager;
 import com.edgardeng.util.ILog;
-import com.edgardeng.widget.ViewPath;
-import com.edgardeng.widget.ViewPathEvaluator;
-import com.edgardeng.widget.ViewPoint;
+import com.edgardeng.widget.BezierAnimationView.ViewPath;
+import com.edgardeng.widget.BezierAnimationView.ViewPathEvaluator;
+import com.edgardeng.widget.BezierAnimationView.ViewPoint;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +39,8 @@ public class UILaunch extends BaseActivity {
 
     @Bind(R.id.button_start)
     Button buttonStart;
+    @Bind(R.id.image_ariplane)
+    ImageView imageAir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +53,6 @@ public class UILaunch extends BaseActivity {
             toast("debug version");
         else
             toast("release version");
-
-//        Window window = getWindow();
-//        window.setGravity(Gravity.LEFT | Gravity.RIGHT);
-//        WindowManager.LayoutParams params = window.getAttributes();
-//        params.x = 0;
-//        params.y = 0;
-//        params.height = 1;
-//        params.width = 1;
-//        window.setAttributes(params);
 
     }
 
@@ -77,10 +71,6 @@ public class UILaunch extends BaseActivity {
     void onLogin() {
         ILog.i("button_start");
         fly();
-//        forward(UILogin.class);
-//        doNetwork();
-//        doNoRxJava();
-//        doOkhttp();
     }
 
     private void doNetwork() {
@@ -224,12 +214,14 @@ public class UILaunch extends BaseActivity {
         ILog.i(json);
     }
 
+
+    /* 贝叶斯 曲线运动*/
     private void  fly () {
         ViewPath path = new ViewPath(); //偏移坐标
             path.moveTo(0,0);
-            path.lineTo(0,500);
-            path.curveTo(-300,200,-600,800,-800,400);
-            path.lineTo(-800,100);
+//            path.lineTo(0,500);
+            path.curveTo(100,200,150,300,200,400);
+            path.curveTo(200,400,350,300,400,200);
 
             ObjectAnimator anim = ObjectAnimator.ofObject(this,"fabLoc",new ViewPathEvaluator(),path.getPoints().toArray());
             anim.setInterpolator(new AccelerateDecelerateInterpolator());
@@ -238,8 +230,8 @@ public class UILaunch extends BaseActivity {
 
     }
     public void setFabLoc(ViewPoint newLoc){
-        buttonStart.setTranslationX(newLoc.x);
-        buttonStart.setTranslationY(newLoc.y);
+        imageAir.setTranslationX(newLoc.x);
+        imageAir.setTranslationY(newLoc.y);
     }
 
 

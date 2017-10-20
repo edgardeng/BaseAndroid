@@ -10,6 +10,13 @@
         android:layout_height="400dp"
         android:background="@drawable/bg_launch_up"/>
 
+    <ImageView
+        android:id="@+id/image_ariplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_ariplane"/>
+
+
     <Button
         android:id="@+id/button_start"
         android:layout_width="wrap_content"
