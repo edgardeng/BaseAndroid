@@ -1,32 +1,38 @@
 package com.edgardeng.baseandroid;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.Button;
 
 import com.edgardeng.data.model.Repo;
 import com.edgardeng.data.model.User;
-import com.edgardeng.net.TaskManager;
+import com.edgardeng.net.api.GithubApi;
 import com.edgardeng.net.remote.ApiManager;
 import com.edgardeng.util.ILog;
+import com.edgardeng.widget.ViewPath;
+import com.edgardeng.widget.ViewPathEvaluator;
+import com.edgardeng.widget.ViewPoint;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class UILaunch extends BaseActivity {
 
@@ -53,6 +59,7 @@ public class UILaunch extends BaseActivity {
 //        params.height = 1;
 //        params.width = 1;
 //        window.setAttributes(params);
+
     }
 
     @Override
@@ -68,41 +75,111 @@ public class UILaunch extends BaseActivity {
 
     @OnClick(R.id.button_start)
     void onLogin() {
-        toast("button_start");
+        ILog.i("button_start");
+        fly();
 //        forward(UILogin.class);
 //        doNetwork();
-        doOkhttp();
+//        doNoRxJava();
+//        doOkhttp();
     }
 
     private void doNetwork() {
 
-        // 获取用户信息
-        subscription = ApiManager.github()
-                .repos("edgardeng")
-                .subscribeOn(Schedulers.io())
-//                .observeOn(An)
-                .subscribe(getObserver());
+        // set Okhttp Client
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.connectTimeout(9, TimeUnit.SECONDS);
+        OkHttpClient client = builder.build();
 
+        // set Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(GithubApi.END_POINT)
+                .client(client) // add http client. 可以不要 ？
+                .addConverterFactory(GsonConverterFactory.create())// add json Converter.Factory
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // add rxjava adapter
+                .build();
+
+        // set Rxjava
+        GithubApi api = retrofit.create(GithubApi.class);
+        api.followerL("edgardeng")
+                // java.lang.IllegalArgumentException: Unable to create call adapter
+                // for io.reactivex.Observable<java.util.List<Repo>>
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver2()); // 将结果传给订阅着
     }
-    protected Subscription subscription;
+
+    Observer<List<User>> observer2;
+
+    private Observer<? super List<User>> getObserver2() {
+
+        if (null == observer2) {
+            observer2 = new Observer<List<User>>() {
+
+                @Override
+                public void onError(Throwable e) {
+                    ILog.w(" - onError ");
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onComplete() {
+                    ILog.w(" - onComplete ");
+                }
+
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+                    ILog.w(" - onSubscribe ");
+                }
+
+                @Override
+                public void onNext(List<User> users) {
+                    ILog.w(" - onNext ");
+                    ILog.w(users.toString());
+                }
+            };
+        }
+
+        return observer2;
+    }
+
     Observer<List<Repo>> observer;
+
+    /**
+     * By default all reactive types execute their requests synchronously.
+     * There are multiple ways to control the threading on which a request occurs:
+     * <p>
+     * Call subscribeOn on the returned reactive type with a Scheduler of your choice.
+     * Use createAsync() when creating the factory which will use OkHttp's internal thread pool.
+     * Use createWithScheduler(Scheduler) to supply a default subscription Scheduler.
+     *
+     * @return
+     */
     private Observer<? super List<Repo>> getObserver() {
 
         if (null == observer) {
             observer = new Observer<List<Repo>>() {
-                @Override
-                public void onCompleted() {
-                    ILog.w(" - onCompleted");
-                }
 
                 @Override
                 public void onError(Throwable e) {
-                    ILog.w(" - onError");
+                    ILog.w(" - onError ");
+                    e.printStackTrace();
+                }
+
+                @Override
+                public void onComplete() {
+                    ILog.w(" - onComplete ");
+                }
+
+                @Override
+                public void onSubscribe(@NonNull Disposable d) {
+                    ILog.w(" - onSubscribe ");
                 }
 
                 @Override
                 public void onNext(List<Repo> users) {
-                    ILog.w(" - onNext");
+                    ILog.w(" - onNext ");
+                    ILog.w(users.toString());
                 }
             };
         }
@@ -110,23 +187,31 @@ public class UILaunch extends BaseActivity {
         return observer;
     }
 
+    private void doNoRxJava() {
 
+        GithubApi api = ApiManager.getGithub(); // 没有问题
+        Call<List<User>> call = api.followers("edgardeng");
+        call.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                List<User> users = response.body();
+                ILog.w("Retrofit Return", users.toString());
+                ILog.w("Retrofit Return Single", users.get(0).toString());
+            }
 
-    private void doOkhttp() {
-        HashMap<String,String> hash = new HashMap<>();
-        hash.put("c","activity");
-        hash.put("a","getRedPacket4ActivityTest");
-        hash.put("userid","361");
-        hash.put("aid","1");
-        doTaskAsync(1,null,hash);
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+            }
+        });
     }
 
-    /** doTaskAsync task with taskid,url,param */
-    public void doTaskAsync (int taskId, String taskUrl, HashMap<String, String> taskArgs) {
-//		doTaskAsync(taskId, taskUrl, taskArgs, 0) ;
-        TaskManager taskManager = getTaskManager();
-        taskManager.get(taskId,taskUrl,taskArgs);
-
+    private void doOkhttp() {
+        HashMap<String, String> hash = new HashMap<>();
+        hash.put("c", "activity");
+        hash.put("a", "getRedPacket4ActivityTest");
+        hash.put("userid", "361");
+        hash.put("aid", "1");
+        doTaskAsync(1, null, hash);
     }
 
     @Override
@@ -139,74 +224,23 @@ public class UILaunch extends BaseActivity {
         ILog.i(json);
     }
 
-    private void testRxJava() {
-        /** */
-        String[] names = {"edgar", "deng", "edgar deng"};
-        Observable.from(names)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String name) {
-                        ILog.w("RxJava", name);
-                    }
-                });
+    private void  fly () {
+        ViewPath path = new ViewPath(); //偏移坐标
+            path.moveTo(0,0);
+            path.lineTo(0,500);
+            path.curveTo(-300,200,-600,800,-800,400);
+            path.lineTo(-800,100);
 
-        // 1创建 被观察者
-        Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-
-                subscriber.onNext("hello");
-            }
-        })
-                //订阅 观察者
-                .subscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        ILog.d("RxJava Subscriber", "onNext:" + s);
-                    }
-                });
-
-
-        Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("hello");
-            }
-        })
-                .map(new Func1<String, String>() {
-                    @Override
-                    public String call(String s) {
-                        return s + "word";
-                    }
-                })
-                .subscribe(new Subscriber<String>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(String s) {
-                        ILog.d("RxJava Subscriber", "onNext" + s);
-                    }
-                });
-
+            ObjectAnimator anim = ObjectAnimator.ofObject(this,"fabLoc",new ViewPathEvaluator(),path.getPoints().toArray());
+            anim.setInterpolator(new AccelerateDecelerateInterpolator());
+            anim.setDuration(3000);
+            anim.start();
 
     }
+    public void setFabLoc(ViewPoint newLoc){
+        buttonStart.setTranslationX(newLoc.x);
+        buttonStart.setTranslationY(newLoc.y);
+    }
+
 
 }

@@ -11,8 +11,12 @@ public class User {
 
     private String lgoin ;
     private String id ;
+    private String name ;
     private String email;
     private String url;
+    public User () {
+
+    }
 
     /*
     "login": "edgardeng",

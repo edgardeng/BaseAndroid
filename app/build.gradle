@@ -47,12 +47,13 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
     compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    compile 'com.google.code.gson:gson:2.6.2'
-    compile 'io.reactivex:rxjava:1.1.6'
-    //    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'  //RxAndroid
+    compile 'io.reactivex.rxjava2:rxjava:2.1.5'
+    compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
 
     //RxJava
-    //    compile 'io.reactivex:rxandroid:1.0.1'  //RxAndroid
+
     //    compile 'com.squareup.okhttp3:okhttp:3.2.0'
 }

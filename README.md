@@ -41,9 +41,18 @@ and search for ButterKnife Zelezny
    
    convert Java Objects into their JSON representation.
 
+
+```
+Gson gson = new Gson();
+
+List<HorizontalSection> sections = gson.fromJson(json,
+                        new TypeToken<List<HorizontalSection>>() { }.getType()
+             
+                
+```
 * [RxJava](https://github.com/ReactiveX/RxJava)
       
-       Java VM implementation of Reactive Extensions.
+   Java VM implementation of Reactive Extensions.
    
    
 ## UI 
