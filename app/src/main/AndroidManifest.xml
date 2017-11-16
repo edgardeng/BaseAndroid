@@ -53,7 +53,8 @@
 
         <activity android:name=".ui.UILogin">
         </activity>
-
+        <activity android:name=".ui.UIApi">
+        </activity>
 
         <!-- 接收器 更新并下载完成-->
         <receiver

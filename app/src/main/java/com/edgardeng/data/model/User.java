@@ -18,6 +18,12 @@ public class User {
 
     }
 
+    public void setInfo(String id,String name,String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
     /*
     "login": "edgardeng",
             "id": 7332501,
@@ -50,8 +56,8 @@ public class User {
             "created_at": "2014-04-18T01:43:34Z",
             "updated_at": "2016-04-13T12:58:30Z"
            */
-    public String toString(){
-        return "id:"+id+";email:"+email+";url:"+url;
+    public String toString() {
+        return "id:"+id+"; name:"+ name + "; email:"+email+"; url:"+url;
     }
 
 

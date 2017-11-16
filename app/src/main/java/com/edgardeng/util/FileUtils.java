@@ -40,7 +40,16 @@ public class FileUtils {
         return f;
 
    }
-    
+
+	public File createCacheFile(String url) throws IOException {
+		File file = new File(cacheDir, url);
+		if (file.exists()) {
+			file.delete();
+		}
+		file.createNewFile();
+		return file;
+	}
+
     public static void deleteFile(String filename) {
        
         File f = new File(Environment.getExternalStorageDirectory()+File.separator+filename);
