@@ -1,0 +1,115 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+    <View
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:background="@color/fly_color"/>
+
+    <View
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@color/fly_color"/>
+
+    <ImageView
+        android:id="@+id/image_ariplane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/image_bg"
+        android:layout_alignTop="@id/image_bg"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@mipmap/ic_ariplane"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp">
+    <Button
+        android:id="@+id/button_move_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="左移动10像素"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button_red"/>
+
+    <Button
+        android:id="@+id/button_move_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="右移动10像素"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button_red"/>
+
+    <Button
+        android:id="@+id/button_move_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="上移动10像素"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button_red"/>
+
+    <Button
+        android:id="@+id/button_move_down"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="下移动10像素"
+        android:textColor="#ffffff"
+        android:background="@drawable/bg_button_red"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp">
+        <Button
+            android:id="@+id/button_rotate_anti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="逆时针转30度"
+            android:textColor="#ffffff"
+            android:background="@drawable/bg_button_red"/>
+
+        <Button
+            android:id="@+id/button_rotate_clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="顺时针转30度"
+            android:textColor="#ffffff"
+            android:background="@drawable/bg_button_red"/>
+
+        <Button
+            android:id="@+id/button_alpha_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="透明度+0.1"
+            android:textColor="#ffffff"
+            android:background="@drawable/bg_button_red"/>
+
+        <Button
+            android:id="@+id/button_alpha_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="透明度 - 0.1"
+            android:textColor="#ffffff"
+            android:background="@drawable/bg_button_red"/>
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

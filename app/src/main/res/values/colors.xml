@@ -24,5 +24,9 @@
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
 
+    <color name="fly_color">#8de1ff</color>
+
+    <color name="indicator_unselected"  >#757575</color>
+    <color name="indicator_selected"    >#f0f0f0</color>
 
 </resources>

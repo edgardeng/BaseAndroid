@@ -55,6 +55,13 @@
         </activity>
         <activity android:name=".ui.UIApi">
         </activity>
+        <activity android:name=".ui.UIViewProperty">
+        </activity>
+        <activity android:name=".ui.UIAnimation">
+        </activity>
+        <activity android:name=".ui.UIHome">
+        </activity>
+
 
         <!-- 接收器 更新并下载完成-->
         <receiver
