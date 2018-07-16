@@ -28,18 +28,18 @@
         android:gravity="center"
         android:layout_alignParentBottom="true" >
     <Button
-        android:id="@+id/button_move_left"
+        android:id="@+id/button_move_left_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="左移动10像素"
+        android:text="左右移动"
         android:textColor="#ffffff"
         android:background="@drawable/bg_button_red"/>
 
     <Button
-        android:id="@+id/button_move_right"
+        android:id="@+id/button_move_up_down"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="右移动10像素"
+        android:text="上下移动"
         android:textColor="#ffffff"
         android:background="@drawable/bg_button_red"/>
 
@@ -72,7 +72,7 @@
             android:id="@+id/button_rotate_anti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="逆时转1圈"
+            android:text="逆时自转1圈"
             android:textColor="#ffffff"
             android:background="@drawable/bg_button_red"/>
 
@@ -80,7 +80,7 @@
             android:id="@+id/button_rotate_clock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="顺时转2圈"
+            android:text="顺时自转2圈"
             android:textColor="#ffffff"
             android:background="@drawable/bg_button_red"/>
 

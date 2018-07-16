@@ -7,8 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.edgardeng.net.TaskHandler;
-import com.edgardeng.net.TaskManager;
+import com.edgardeng.net.task.OnTaskListener;
+import com.edgardeng.net.task.TaskHandler;
+import com.edgardeng.net.task.TaskManager;
 import com.edgardeng.net.api.BaseApi;
 
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.HashMap;
  * @date 16/1/9
  */
 // TODO - less better !!!
-public class BaseActivity extends AppCompatActivity implements TaskHandler.OnTaskListener{
+public class BaseActivity extends AppCompatActivity implements OnTaskListener {
 
 
     public void toast (String msg) {
@@ -46,8 +47,8 @@ public class BaseActivity extends AppCompatActivity implements TaskHandler.OnTas
     public TaskManager getTaskManager() {
         if(taskManager == null)
             taskManager = new TaskManager(this);
-        taskManager.setHostIP(BaseApi.HOST_IP);
-        taskManager.setHostSegment(BaseApi.getHttpPathSegment());
+//        taskManager.setHostIP(BaseApi.HOST_IP);
+//        taskManager.setHostSegment(BaseApi.getHttpPathSegment());
         return taskManager;
     }
 
@@ -66,12 +67,7 @@ public class BaseActivity extends AppCompatActivity implements TaskHandler.OnTas
 
 
     @Override
-    public void onJsonSuccess(int taskId, String json) {
-
-    }
-
-    @Override
-    public void onJsonFail(int taskId, String json) {
+    public void onTaskFail(int task, String json) {
 
     }
 
@@ -82,6 +78,11 @@ public class BaseActivity extends AppCompatActivity implements TaskHandler.OnTas
 
     @Override
     public void onTaskComplete(int taskId, String json) {
+
+    }
+
+    @Override
+    public void onTaskDoing(int task, int percent) {
 
     }
 }

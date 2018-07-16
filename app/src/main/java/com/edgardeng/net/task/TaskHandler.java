@@ -1,10 +1,10 @@
-package com.edgardeng.net;
+package com.edgardeng.net.task;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import static com.edgardeng.net.HttpTask.*;
+import static com.edgardeng.net.task.HttpTask.*;
 
 /**
  * @author Edgar Deng (http:weibo.com/edgardeng)
@@ -31,16 +31,22 @@ public class TaskHandler extends Handler{
             }
 
             switch (msg.what) {
-                case JSON_SUCCESS:
-                    mListener.onJsonSuccess(taskid, result);
+                case TASK_COMPELTE:
+                    mListener.onTaskComplete(taskid, result);
                     break;
-                case JSON_FAIL:
-                    mListener.onJsonFail(taskid, result);
+                case TASK_FAIL:
+                    mListener.onTaskFail(taskid, result);
+                    break;
+                case TASK_DOING:
+                    int percent = 0;
+                    try{
+                        percent = Integer.valueOf(result).intValue();
+                    }catch (NumberFormatException e){
+                    }
+                    mListener.onTaskDoing(taskid, percent);
                     break;
                 case NETWORK_ERROR:
                     mListener.onNetworkError(taskid);
-                case NETWORK_COMPELTE:
-                    mListener.onTaskComplete(taskid,result);
             }
 
         } catch (Exception e) {
@@ -48,16 +54,4 @@ public class TaskHandler extends Handler{
         }
     }
 
-
-    /** 网络任务 结果监听 */
-    public interface OnTaskListener{
-        //        public void onTaskComplete 	(int taskId, String result);
-        public void onJsonSuccess(int taskId, String json);
-
-        public void onJsonFail(int taskId, String json);
-
-        public void onNetworkError(int taskId);
-
-        public void onTaskComplete(int taskId,String json);
-    }
 }

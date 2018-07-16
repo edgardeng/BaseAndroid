@@ -1,6 +1,9 @@
 package com.edgardeng.baseandroid;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.os.Build;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.edgardeng.baseandroid.ui.UIAnimation;
+import com.edgardeng.baseandroid.ui.UIHome;
 import com.edgardeng.baseandroid.ui.UILogin;
 import com.edgardeng.baseandroid.ui.UIViewProperty;
 import com.edgardeng.util.ILog;
@@ -53,34 +57,26 @@ public class UILaunch extends BaseActivity {
         setContentView(R.layout.page_launch);
         ButterKnife.bind(this);
         ILog.i(BuildConfig.DEBUG ? "debug onCreate" : "release onCreate");
-//        new Update().check(this); // fir.im 停止免费服务
-//        if (BuildConfig.DEBUG)
-//            toast("debug version");
-//        else
-//            toast("release version");
 
-//        final SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-//        if (sp.getBoolean(SettingsUtil.KEY_FIRST_LAUNCH, true)) {
-//
-//            setContentView(R.layout.activity_onboarding);
-//
-//            // Do other things here.
-//        } else {
-//
-//            navigateToMainActivity();
-//initViewPager
-//            finish();
-//        }
+        final SharedPreferences sp = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        boolean first = sp.getBoolean("first_lauch",true);
+        if (first) {
+            imageAir.setVisibility(View.GONE);
+            initViewPager();
+        } else {
+            indicator0.setVisibility(View.GONE);
+            indicator1.setVisibility(View.GONE);
+            indicator2.setVisibility(View.GONE);
+            buttonStart.setVisibility(View.INVISIBLE);
+            imageAir.setRotation(200);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    fly();
+                }
+            }, 100);
+        }
 
-
-        imageAir.setRotation(200); // 150 + 3
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-//                fly();
-                initViewPager();
-            }
-        }, 100);
     }
 
     @Override
@@ -97,11 +93,15 @@ public class UILaunch extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @OnClick(R.id.button_start)
     void onLogin() {
-        ILog.i("button_start");
-//        forward(UILogin.class);
-
-        forward(UIAnimation.class);
-
+        forward(UIHome.class);
+        final SharedPreferences sp = this.getSharedPreferences("user", Context.MODE_PRIVATE);
+        boolean first = sp.getBoolean("first_lauch",true);
+        if (first) {
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putBoolean("first_lauch",false);
+            editor.commit();
+        }
+        finish();
     }
 
     /* 贝叶斯 曲线运动*/
@@ -117,14 +117,33 @@ public class UILaunch extends BaseActivity {
         path.quadTo(origin_x-220, origin_y+450, origin_x-30, origin_y+302);
 
         ObjectAnimator anim_move = ObjectAnimator.ofFloat(imageAir, View.X, View.Y, path);
-        anim_move.setDuration(3000);
+        anim_move.setDuration(2000);
         ObjectAnimator anim_rotate = ObjectAnimator .ofFloat(imageAir, "rotation", 200f, -65f);
-        anim_rotate.setDuration(3000);
+        anim_rotate.setDuration(2000);
+        anim_rotate.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
 
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+
+                forward(UIHome.class);
+                finish();
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         anim_move.start();
         anim_rotate.start();
-
-
     }
 
     private void initViewPager() {
@@ -139,11 +158,12 @@ public class UILaunch extends BaseActivity {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                int colorUpdate = (Integer) new ArgbEvaluator().evaluate(positionOffset, bgColors[position], bgColors[position == 2 ? position : position + 1]);
 //                viewPager.setBackgroundColor(colorUpdate);
-                ILog.w("onPageScrolled " + position); // 滑动变化
+//                ILog.w("onPageScrolled " + position); // 滑动变化
             }
 
             @Override
             public void onPageSelected(int position) {
+                ILog.w("onPageScrolled " + position);
                 updateIndicators(position);
             }
 
@@ -197,8 +217,9 @@ public class UILaunch extends BaseActivity {
         // 销毁item
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView(imageViews.get(position));
-            imageViews.remove(position);
+//            container.removeView(imageViews.get(position));
+//            imageViews.remove(position);
+            ILog.w("destroyItem " + position);
         }
 
     }
