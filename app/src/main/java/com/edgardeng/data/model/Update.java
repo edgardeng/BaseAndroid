@@ -1,11 +1,6 @@
 package com.edgardeng.data.model;
 
-/**
- * Created by dengxixi on 16/1/9.
- */
-
 import android.content.Context;
-import android.util.Log;
 
 import com.edgardeng.baseandroid.BuildConfig;
 import com.edgardeng.receiver.UpdateReceiver;

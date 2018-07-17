@@ -1,7 +1,6 @@
 package com.edgardeng.baseandroid.ui;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,13 +9,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.edgardeng.baseandroid.BaseActivity;
-import com.edgardeng.baseandroid.R;
 import com.edgardeng.data.model.Repo;
 import com.edgardeng.data.model.User;
 import com.edgardeng.net.api.GithubApi;
@@ -34,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
@@ -43,7 +38,7 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
+
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -392,15 +387,7 @@ public class UIApi  extends BaseActivity {
         doTaskAsync(1, null, hash);
     }
 
-    @Override
-    public void onJsonSuccess(int taskId, String json) {
-        ILog.i(json);
-    }
 
-    @Override
-    public void onJsonFail(int taskId, String json) {
-        ILog.i(json);
-    }
 
     private Bitmap bitmap_edit;
     private Uri imageUri = null;

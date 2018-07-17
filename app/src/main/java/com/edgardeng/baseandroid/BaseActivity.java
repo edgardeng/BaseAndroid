@@ -1,6 +1,4 @@
-package com.edgardeng.baseandroid;/**
- * Created by dengxixi on 16/1/9.
- */
+package com.edgardeng.baseandroid;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.edgardeng.net.task.OnTaskListener;
-import com.edgardeng.net.task.TaskHandler;
 import com.edgardeng.net.task.TaskManager;
-import com.edgardeng.net.api.BaseApi;
 
 import java.util.HashMap;
 
@@ -54,14 +50,12 @@ public class BaseActivity extends AppCompatActivity implements OnTaskListener {
 
     /** doTaskAsync task with taskid,url,param */
     public void doTaskAsync (int taskId, String taskUrl, HashMap<String, String> taskArgs) {
-//		doTaskAsync(taskId, taskUrl, taskArgs, 0) ;
         TaskManager taskManager = getTaskManager();
         taskManager.get(taskId,taskUrl,taskArgs);
     }
 
     /** doTaskAsync task with taskid,param */
     public void doTaskAsync (int taskId,String url) {
-        TaskManager taskManager = getTaskManager();
         doTaskAsync(taskId, url, null) ;
     }
 
