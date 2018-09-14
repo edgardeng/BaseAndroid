@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        Key {
+            keyAlias 'edgardeng'
+            keyPassword '123456'
+            storeFile file('../KeyStore')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
-
     defaultConfig {
         applicationId "com.edgardeng.baseandroid"
         minSdkVersion 19
@@ -11,20 +18,18 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                PACKAGE_NAME       : applicationId,
-                BUGHD_KEY          : "d306d2e6311d811d8ee5924f5f1311d4",
-                JPUSH_CHANNEL      : "fir.im",
-                JPUSH_APPKEY       : "9b134b3ddd7351ca7d629d5d"
+                PACKAGE_NAME : applicationId,
+                BUGHD_KEY    : "d306d2e6311d811d8ee5924f5f1311d4",
+                JPUSH_CHANNEL: "fir.im",
+                JPUSH_APPKEY : "9b134b3ddd7351ca7d629d5d"
         ]
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     sourceSets.main {
         jniLibs.srcDirs = ['libs']  // <-- Set your folder here!
     }
